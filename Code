@@ -1,0 +1,93 @@
+import matplotlib.pyplot as plt 
+
+ 
+
+#initalize lists to hold years and ratings 
+
+year_data = { } 
+
+ 
+
+yearList = [ ] 
+
+ratingList = [ ] 
+
+ 
+
+ 
+
+#read in the data 
+
+file = open("movies.csv", "r") 
+
+for line in file: 
+
+    parts = line.strip() 
+
+    parts = parts.split(',') 
+
+     
+
+    #seperate the year and the rating  
+
+    year = parts[0].strip() 
+
+    rating = float(parts[1].strip()) 
+
+     
+
+    #add unique years to a dictionary and add their ratings onto it. 
+
+    if year not in year_data: 
+
+        year_data[year] = [rating] 
+
+    elif year in year_data: 
+
+        year_data[year].append(rating) 
+
+    else: 
+
+        print("wdf") 
+
+file.close() 
+
+ 
+
+i = 0 
+
+for entry in year_data: 
+
+    average = 0 
+
+    ratings = year_data.get(entry) 
+
+    for flt in ratings: 
+
+        average += flt 
+
+    average = round(average / len(ratings, ), 2) 
+
+    yearList.append(entry) 
+
+    ratingList.append(average) 
+
+     
+
+plt.figure().set_figwidth(200) 
+
+plt.plot(yearList, ratingList) 
+
+ 
+
+ 
+
+highest = max(ratingList) 
+
+highestYear = yearList[ratingList.index(highest)] 
+
+print(f"The year with the highest rating was {highestYear}, with an average rating of {highest}") 
+
+ 
+
+plt.show() 
